@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #f4f6f8;
+}
+
+.app-apartado {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.perfil-card {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.perfil-card p {
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.perfil-card h3 {
+  color: #333;
+}
+
+.editar-btn {
+  padding: 12px 25px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.editar-btn:hover {
+  background: #554ee2;
+}

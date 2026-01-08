@@ -50,18 +50,25 @@ body {
   overflow-y: auto;
 }
 
-/* SALDO */
-.saldo {
-  margin-bottom: 30px;
+/* SALDO CARD */
+.saldo-card {
+  background: #ffffff;
+  max-width: 400px;
+  margin: 0 auto 40px auto;
+  padding: 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 }
 
-.label {
+.saldo-card .label {
   font-size: 14px;
   color: #666;
+  margin-bottom: 10px;
 }
 
-.amount {
-  font-size: 38px;
+.saldo-card .amount {
+  font-size: 40px;
   color: #333;
 }
 
@@ -127,4 +134,3 @@ body {
 .movimiento.gasto span:nth-child(2) {
   color: #c0392b;
 }
-
