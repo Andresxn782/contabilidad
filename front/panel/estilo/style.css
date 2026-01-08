@@ -1,10 +1,11 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  margin: 0;
   background-color: #f4f6f8;
 }
 
@@ -16,31 +17,30 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  width: 230px;
-  background: #ffffff;
+  width: 220px;
+  background-color: #ffffff;
   border-right: 1px solid #e0e0e0;
-  padding: 25px 20px;
+  padding: 20px;
 }
 
 .logo {
-  color: #6c63ff;
   margin-bottom: 40px;
+  color: #2c3e50;
 }
 
 .sidebar nav a {
   display: block;
-  padding: 12px;
+  padding: 12px 10px;
   margin-bottom: 8px;
-  border-radius: 8px;
-  color: #444;
+  color: #555;
   text-decoration: none;
-  transition: background 0.2s;
+  border-radius: 6px;
 }
 
 .sidebar nav a:hover,
 .sidebar nav a.active {
-  background-color: #f0efff;
-  color: #6c63ff;
+  background-color: #eaf2ff;
+  color: #2f5bea;
 }
 
 /* CONTENIDO */
@@ -50,26 +50,19 @@ body {
   overflow-y: auto;
 }
 
-/* SALDO CARD */
-.saldo-card {
-  background: #ffffff;
-  max-width: 400px;
-  margin: 0 auto 40px auto;
-  padding: 30px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+/* SALDO */
+.saldo {
+  margin-bottom: 30px;
 }
 
-.saldo-card .label {
+.saldo .label {
+  color: #777;
   font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
 }
 
-.saldo-card .amount {
-  font-size: 40px;
-  color: #333;
+.saldo .amount {
+  font-size: 36px;
+  color: #2c3e50;
 }
 
 /* RESUMEN */
@@ -81,10 +74,10 @@ body {
 
 .card {
   flex: 1;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .card p {
@@ -92,34 +85,33 @@ body {
   margin-bottom: 10px;
 }
 
-.ingresos {
+.ingresos h3 {
   color: #27ae60;
 }
 
-.gastos {
+.gastos h3 {
   color: #c0392b;
 }
 
 /* HISTORIAL */
 .historial h2 {
   margin-bottom: 20px;
-  color: #333;
+  color: #2c3e50;
 }
 
 .movimiento {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  background: #ffffff;
   padding: 15px;
-  border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
   margin-bottom: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.04);
-  font-size: 14px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.04);
 }
 
 .movimiento span:nth-child(2) {
   text-align: right;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .movimiento span:nth-child(3) {
