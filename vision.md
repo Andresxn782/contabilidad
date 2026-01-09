@@ -22,4 +22,4 @@ El proyecto va enfocado a un usuario joven, con bajos ingresos e inexperiencia e
 
 1.4 - Estadísticas gráficas
 
-1.5 - Frases de educación financiera, tips tontos o mensajes de reto, ejemplo: si ahorras x dinero, en x dias podrás comprarte x cosa
+
