@@ -6,7 +6,7 @@ app = Flask(__name__)
 '''
 Conexión a MySQL, se usa en todas las rutas
 '''
-def get_db():
+def obtener_db():
     return mysql.connector.connect(
         host="localhost",
         user="root",
@@ -22,7 +22,7 @@ devuelve user_id y el frontend lo guarda y lo manda en cada request.
 @app.route("/register", methods=["POST"])
 def register():
     data = request.json
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor()
 
     cursor.execute(
@@ -37,7 +37,7 @@ def register():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor(dictionary=True)
 
     cursor.execute(
@@ -55,23 +55,24 @@ def login():
 '''
 Ingresos
 '''
-# Añadir ingreso
+# Agregar ingreso
 @app.route("/ingresos", methods=["POST"])
-def add_ingreso():
+def agregar_ingreso():
     data = request.json
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor()
 
     cursor.execute(
         """
-        INSERT INTO ingresos (cantidad, date, nota, categoria_id, usuario_id)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO ingresos (nombre, cantidad, date, nota, categoria_id, usuario_id)
+        VALUES (%s, %s, %s, %s, %s, %s)
         """,
         (
+            data["nombre"],
             data["cantidad"],
             data["date"],
             data.get("nota"),
-            data["categoria_id"],
+            data.get["categoria_id"], # data.get para permitir NULL
             data["usuario_id"]
         )
     )
@@ -81,12 +82,18 @@ def add_ingreso():
 
 # Historial de ingresos
 @app.route("/ingresos/<int:usuario_id>")
-def get_ingresos(usuario_id):
-    db = get_db()
+def obtener_ingresos(usuario_id):
+    db = obtener_db()
     cursor = db.cursor(dictionary=True)
 
     cursor.execute(
-        "SELECT * FROM ingresos WHERE usuario_id=%s ORDER BY date DESC",
+         """
+        SELECT i.*, c.nombre AS categoria
+        FROM ingresos i
+        LEFT JOIN categorias c ON i.categoria_id = c.id
+        WHERE i.usuario_id=%s
+        ORDER BY i.date DESC
+        """,
         (usuario_id,)
     )
 
@@ -95,23 +102,24 @@ def get_ingresos(usuario_id):
 '''
 Gastos
 '''
-# Añadir gasto
+# Agregar gasto
 @app.route("/gastos", methods=["POST"])
-def add_gasto():
+def agregar_gasto():
     data = request.json
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor()
 
     cursor.execute(
         """
-        INSERT INTO gastos (cantidad, date, nota, categoria_id, usuario_id)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO gastos (nombre, cantidad, date, nota, categoria_id, usuario_id)
+        VALUES (%s, %s, %s, %s, %s, %s)
         """,
         (
+            data["nombre"],
             data["cantidad"],
             data["date"],
             data.get("nota"),
-            data["categoria_id"],
+            data.get["categoria_id"],
             data["usuario_id"]
         )
     )
@@ -121,12 +129,18 @@ def add_gasto():
 
 # Historial de gastos
 @app.route("/gastos/<int:usuario_id>")
-def get_gastos(usuario_id):
-    db = get_db()
+def obtener_gastos(usuario_id):
+    db = obtener_db()
     cursor = db.cursor(dictionary=True)
 
     cursor.execute(
-        "SELECT * FROM gastos WHERE usuario_id=%s ORDER BY date DESC",
+        """
+        SELECT g.*, c.nombre AS categoria
+        FROM gastos g
+        LEFT JOIN categorias c ON g.categoria_id = c.id
+        WHERE g.usuario_id=%s
+        ORDER BY g.date DESC
+        """,
         (usuario_id,)
     )
 
@@ -136,21 +150,22 @@ def get_gastos(usuario_id):
 DASHBOARD (saldo y resumen)
 '''
 @app.route("/dashboard/<int:usuario_id>")
+# Permitir al front solicitar el saldo y resumen de un usuario específico
 def dashboard(usuario_id):
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor()
 
     cursor.execute(
-        "SELECT SUM(cantidad) FROM ingresos WHERE usuario_id=%s",
+        "SELECT COALESCE(SUM(cantidad), 0) FROM ingresos WHERE usuario_id=%s",
         (usuario_id,)
-    )
-    total_ingresos = cursor.fetchone()[0] or 0
+    ) # Uso COALESCE para evitar None y que devuelva 0, y no interferir así en el frontend
+    total_ingresos = cursor.fetchone()[0]
 
     cursor.execute(
-        "SELECT SUM(cantidad) FROM gastos WHERE usuario_id=%s",
+        "SELECT COALESCE(SUM(cantidad), 0) FROM gastos WHERE usuario_id=%s",
         (usuario_id,)
     )
-    total_gastos = cursor.fetchone()[0] or 0
+    total_gastos = cursor.fetchone()[0]
 
     saldo = total_ingresos - total_gastos
 
@@ -159,6 +174,7 @@ def dashboard(usuario_id):
         "gastos": total_gastos,
         "saldo": saldo
     })
+# === El front usa estos valores para mostrar el dashboard en tiempo real ===
 
 '''
 PRESUPUESTOS
@@ -166,7 +182,7 @@ PRESUPUESTOS
 @app.route("/presupuesto", methods=["POST"])
 def set_presupuesto():
     data = request.json
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor()
 
     cursor.execute(
@@ -185,7 +201,7 @@ ESTADÍSTICAS
 '''
 @app.route("/stats/gastos/<int:usuario_id>")
 def stats_gastos(usuario_id):
-    db = get_db()
+    db = obtener_db()
     cursor = db.cursor(dictionary=True)
 
     cursor.execute("""
@@ -203,3 +219,12 @@ INICIAR EL SERVIDOR
 '''
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+'''
+- De esta forma no se guardan saldos ni historiales redundantes
+- Todo se calcula en cada petición
+- Base de datos simple y fácil de entender
+- Resulta así un backend limpio
+'''
+# No se han utilizado métodos de seguridad avanzados (hashing de contraseñas, tokens, etc.) ya que es para un entorno educativo y de prueba.
