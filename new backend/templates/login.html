@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
     <title>Login | Aplicación de Cuentas</title>
-    <link rel="stylesheet" href="estilos/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   </head>
-  <script src="login.js"></script>
-
   <body>
     <div class="login-container">
       <h2>Iniciar Sesión</h2>
@@ -29,5 +26,6 @@
         <p>¿Olvidaste tu contraseña? <a href="#">Recuperar</a></p>
       </div>
     </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
   </body>
 </html>

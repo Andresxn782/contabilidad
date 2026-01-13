@@ -21,19 +21,29 @@
 
       <main class="content">
         <h2>Gastos</h2>
+
         <div class="lista-movimientos">
           <div class="movimiento gasto">
             <span>Alquiler</span>
-            <span>- €700,00</span>
+            <span>- €700</span>
             <span>10/01/2026</span>
           </div>
-          <div class="movimiento gasto">
-            <span>Amazon</span>
-            <span>- €45,99</span>
-            <span>12/01/2026</span>
-          </div>
+        </div>
+
+        <!-- BOTÓN -->
+        <button id="btnGasto" class="btn-add">+</button>
+
+        <!-- FORMULARIO -->
+        <div id="formGasto" class="formulario oculto">
+          <input type="text" id="nombreGasto" placeholder="Nombre" />
+          <input type="number" id="cantidadGasto" placeholder="Cantidad" />
+          <input type="date" id="fechaGasto" />
+          <button id="guardarGasto">Guardar</button>
         </div>
       </main>
     </div>
+
+    <script src="gastos.js"></script>
   </body>
 </html>
+

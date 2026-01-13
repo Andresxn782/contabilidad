@@ -7,7 +7,6 @@
   </head>
   <body>
     <div class="app">
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <h2 class="logo">A P C</h2>
         <nav>
@@ -20,23 +19,30 @@
         </nav>
       </aside>
 
-      <!-- CONTENIDO -->
       <main class="content">
         <h2>Ingresos</h2>
 
         <div class="lista-movimientos">
           <div class="movimiento ingreso">
             <span>Nómina</span>
-            <span>+ €1.200,00</span>
+            <span>+ €1200</span>
             <span>01/01/2026</span>
           </div>
-          <div class="movimiento ingreso">
-            <span>Transferencia Juan</span>
-            <span>+ €50,00</span>
-            <span>30/12/2025</span>
-          </div>
+        </div>
+
+        <!-- BOTÓN -->
+        <button id="btnIngreso" class="btn-add">+</button>
+
+        <!-- FORMULARIO -->
+        <div id="formIngreso" class="formulario oculto">
+          <input type="text" id="nombreIngreso" placeholder="Nombre" />
+          <input type="number" id="cantidadIngreso" placeholder="Cantidad" />
+          <input type="date" id="fechaIngreso" />
+          <button id="guardarIngreso">Guardar</button>
         </div>
       </main>
     </div>
+
+    <script src="ingresos.js"></script>
   </body>
 </html>
