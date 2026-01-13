@@ -2,48 +2,34 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Gastos | Aplicación de Cuentas</title>
-    <link rel="stylesheet" href="estilo/style.css" />
+    <title>Gastos | Contabilidad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
   <body>
-    <div class="app">
-      <aside class="sidebar">
-        <h2 class="logo">A P C</h2>
-        <nav>
-          <a href="../../../panel/index.html">Dashboard</a>
-          <a href="../ingresos/ingresos.html">Ingresos</a>
-          <a class="active" href="gastos.html">Gastos</a>
-          <a href="../presupuestos/presupuestos.html">Presupuesto</a>
-          <a href="../estadisticas/estadisticas.html">Estadísticas</a>
-          <a href="../perfil/perfil.html">Perfil</a>
-        </nav>
-      </aside>
+    <header>
+      <h1>Gastos</h1>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
+    </header>
 
-      <main class="content">
-        <h2>Gastos</h2>
-
-        <div class="lista-movimientos">
-          <div class="movimiento gasto">
-            <span>Alquiler</span>
-            <span>- €700</span>
-            <span>10/01/2026</span>
-          </div>
+    <main>
+      <div class="lista-movimientos">
+        {% for gasto in gastos %}
+        <div class="movimiento gasto">
+          <span>{{ gasto.nombre }}</span>
+          <span>- €{{ gasto.cantidad }}</span>
+          <span>{{ gasto.date }}</span>
         </div>
+        {% endfor %}
+      </div>
 
-        <!-- BOTÓN -->
-        <button id="btnGasto" class="btn-add">+</button>
-
-        <!-- FORMULARIO -->
-        <div id="formGasto" class="formulario oculto">
-          <input type="text" id="nombreGasto" placeholder="Nombre" />
-          <input type="number" id="cantidadGasto" placeholder="Cantidad" />
-          <input type="date" id="fechaGasto" />
-          <button id="guardarGasto">Guardar</button>
-        </div>
-      </main>
-    </div>
-
-    <script src="gastos.js"></script>
+      <h2>Añadir gasto</h2>
+      <form action="{{ url_for('nuevo_gasto', usuario_id=usuario_id) }}" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre del gasto" required />
+        <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required />
+        <input type="date" name="date" required />
+        <input type="text" name="nota" placeholder="Nota (opcional)" />
+        <input type="submit" value="Añadir gasto" />
+      </form>
+    </main>
   </body>
 </html>
-

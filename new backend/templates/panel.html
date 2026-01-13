@@ -2,73 +2,24 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Ingresos | Aplicación de Cuentas</title>
-    <link rel="stylesheet" href="../static/css/panel.css" />
+    <title>Panel | Contabilidad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
-  <script src="../static/js/panel.js"></script>
   <body>
-    <div class="app">
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <h2 class="logo">A P C</h2>
-        <nav>
-          <a class="active" href="../panel/index.html">Dashboard</a>
-          <a href="../panel/apartados/ingresos/ingresos.html">Ingresos</a>
-          <a href="../panel/apartados/gastos/gastos.html">Gastos</a>
-          <a href="../panel/apartados/presupuestos/presupuestos.html">Presupuesto</a>
-          <a href="../panel/apartados/estadisticas/estadisticas.html">Estadísticas</a>
-          <a href="../panel/apartados/perfil/perfil.html">Perfil</a>
-        </nav>
-      </aside>
-      <main>
-        <!-- SALDO ACTUAL (CENTRADO Y EN RECUADRO) -->
-        <section class="saldo-card">
-          <p class="label">Saldo actual</p>
-          <h1 class="amount">€ 504,01</h1>
-        </section>
-
-        <!-- RESUMEN -->
-        <section class="resumen">
-          <div class="card">
-            <p>Ingresos</p>
-            <h3 class="ingresos">+ €1.250,00</h3>
-          </div>
-
-          <div class="card">
-            <p>Gastos</p>
-            <h3 class="gastos">- €745,99</h3>
-          </div>
-        </section>
-
-        <!-- HISTORIAL -->
-        <section class="historial">
-          <h2>Historial de movimientos</h2>
-
-          <div class="movimiento gasto">
-            <span>Amazon</span>
-            <span>- €45,99</span>
-            <span>12/01/2026</span>
-          </div>
-
-          <div class="movimiento gasto">
-            <span>Alquiler</span>
-            <span>- €700,00</span>
-            <span>10/01/2026</span>
-          </div>
-
-          <div class="movimiento ingreso">
-            <span>Nómina</span>
-            <span>+ €1.200,00</span>
-            <span>01/01/2026</span>
-          </div>
-
-          <div class="movimiento ingreso">
-            <span>Transferencia recibida</span>
-            <span>+ €50,00</span>
-            <span>30/12/2025</span>
-          </div>
-        </section>
-      </main>
-    </div>
+    <header>
+      <h1>Panel de Control</h1>
+      <p>Usuario ID: {{ usuario_id }}</p>
+    </header>
+    <main>
+      <div class="resumen">
+        <p>Total ingresos: €{{ ingresos }}</p>
+        <p>Total gastos: €{{ gastos }}</p>
+        <p>Saldo: €{{ saldo }}</p>
+      </div>
+      <nav>
+        <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">Ingresos</a>
+        <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">Gastos</a>
+      </nav>
+    </main>
   </body>
 </html>
