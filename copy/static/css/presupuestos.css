@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  margin: 0;
+  background: #f4f6f8;
+}
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 220px;
+  background: #fff;
+  border-right: 1px solid #e0e0e0;
+  padding: 25px 20px;
+}
+.logo {
+  color: #6c63ff;
+  margin-bottom: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 12px;
+}
+.sidebar nav a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: #444;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #f0efff;
+  color: #6c63ff;
+}
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+.content h2 {
+  color: #333;
+  margin-bottom: 25px;
+}
+.presupuesto-card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+.presupuesto-card p {
+  color: #777;
+  margin-bottom: 8px;
+}
+.presupuesto-card h3 {
+  color: #333;
+}

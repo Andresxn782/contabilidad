@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gastos | Contabilidad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <h1>Gastos</h1>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
+    </header>
+
+    <main>
+      <div class="lista-movimientos">
+        {% for gasto in gastos %}
+        <div class="movimiento gasto">
+          <span>{{ gasto.nombre }}</span>
+          <span>- €{{ gasto.cantidad }}</span>
+          <span>{{ gasto.date }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <h2>Añadir gasto</h2>
+      <form action="{{ url_for('nuevo_gasto', usuario_id=usuario_id) }}" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre del gasto" required />
+        <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required />
+        <input type="date" name="date" required />
+        <input type="text" name="nota" placeholder="Nota (opcional)" />
+        <input type="submit" value="Añadir gasto" />
+      </form>
+    </main>
+  </body>
+</html>
