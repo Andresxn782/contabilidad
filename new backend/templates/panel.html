@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Panel | Contabilidad</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}" />
-  </head>
-  <body>
-    <header>
-      <h1>Panel de Control</h1>
-      <p>Usuario ID: {{ usuario_id }}</p>
-    </header>
-    <main>
-      <div class="resumen">
-        <p>Total ingresos: €{{ ingresos }}</p>
-        <p>Total gastos: €{{ gastos }}</p>
-        <p>Saldo: €{{ saldo }}</p>
-      </div>
-      <nav>
-        <aside class="sidebar">
-    <h2 class="logo">A P C</h2>
+<head>
+  <meta charset="UTF-8">
+  <title>Panel | Contabilidad</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Panel de Control</h1>
+    <p>Usuario ID: {{ usuario_id }}</p>
+  </header>
+  <main>
+    <div class="resumen">
+      <p>Total ingresos: €{{ ingresos }}</p>
+      <p>Total gastos: €{{ gastos }}</p>
+      <p>Saldo: €{{ saldo }}</p>
+    </div>
     <nav>
-        <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Dashboard</a>
-        <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">Ingresos</a>
-        <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">Gastos</a>
-        <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">Presupuesto</a>
-        <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">Estadísticas</a>
-        <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">Perfil</a>
+      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">Ingresos</a>
+      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">Gastos</a>
     </nav>
-</aside>
-
-    </main>
-  </body>
+  </main>
+</body>
 </html>
+

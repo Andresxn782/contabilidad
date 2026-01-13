@@ -1,69 +1,37 @@
-/* Reset y base */
-* {
-  box-sizing: border-box;
+/* style.css */
+body, html {
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-}
-
-body,
-html {
-  width: 100%;
-  height: 100%;
   background: #f9f9f9;
 }
 
-/* Contenedor principal */
-.app {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 220px;
-  background: teal;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.sidebar .logo {
-  font-size: 24px;
+header {
+  width: 800px;
+  margin: auto;
+  padding: 20px 0;
   text-align: center;
-  margin-bottom: 30px;
 }
 
-.sidebar nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  display: block;
+header h1 {
+  margin: 0;
 }
 
-.sidebar nav a.active,
-.sidebar nav a:hover {
-  background: #006666;
+main {
+  width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Área de contenido */
-.content {
-  flex: 1;
-  padding: 30px;
-}
-
-/* Cabecera principal */
-.content h2 {
-  margin-bottom: 20px;
-}
-
-/* Resumen de saldo y movimientos */
+/* Resumen del panel */
 .resumen p {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 /* Lista de movimientos */
@@ -80,11 +48,11 @@ html {
   margin-bottom: 5px;
 }
 
-.movimiento.ingreso {
+.ingreso {
   background: #e0f7e0;
 }
 
-.movimiento.gasto {
+.gasto {
   background: #fde0e0;
 }
 
@@ -96,15 +64,15 @@ form {
   gap: 10px;
 }
 
-form input[type='text'],
-form input[type='number'],
-form input[type='date'] {
+form input[type="text"],
+form input[type="number"],
+form input[type="date"] {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-form input[type='submit'] {
+form input[type="submit"] {
   padding: 10px;
   background: teal;
   color: white;
@@ -113,11 +81,11 @@ form input[type='submit'] {
   cursor: pointer;
 }
 
-form input[type='submit']:hover {
+form input[type="submit"]:hover {
   background: #006666;
 }
 
-/* Botón flotante para añadir ingresos/gastos */
+/* Botón flotante para añadir movimientos (opcional) */
 #nuevo {
   position: fixed;
   bottom: 20px;
@@ -132,9 +100,10 @@ form input[type='submit']:hover {
   line-height: 50px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 #nuevo:hover {
   background: #006666;
 }
+
