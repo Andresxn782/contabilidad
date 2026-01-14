@@ -1,35 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Estadísticas | Aplicación de Cuentas</title>
-    <link rel="stylesheet" href="estilo/style.css" />
-  </head>
-  <body>
-    <div class="app">
-      <aside class="sidebar">
-        <h2 class="logo">A P C</h2>
-        <nav>
-          <a href="../../../panel/index.html">Dashboard</a>
-          <a href="../ingresos/ingresos.html">Ingresos</a>
-          <a href="../gastos/gastos.html">Gastos</a>
-          <a href="../presupuestos/presupuestos.html">Presupuesto</a>
-          <a class="active" href="estadisticas.html">Estadísticas</a>
-          <a href="../perfil/perfil.html">Perfil</a>
-        </nav>
-      </aside>
+<head>
+  <meta charset="UTF-8">
+  <title>Estadísticas | Contabilidad</title>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+    }
 
-      <main class="content">
-        <h2>Estadísticas</h2>
-        <div class="estadistica-card">
-          <p>Ingresos vs Gastos</p>
-          <div class="grafico-placeholder">[Gráfico aquí]</div>
+    /* Layout general */
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Barra lateral */
+    .sidebar {
+      width: 220px;
+      background: teal;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .sidebar a {
+      display: block;
+      margin: 15px 0;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contenido */
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .grafico {
+      height: 180px;
+      background: #e0e0e0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">🏠 Panel</a>
+      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+      <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
+      <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
+      <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
+    </aside>
+
+    <!-- Contenido -->
+    <div class="content">
+      <header>
+        <h1>Estadísticas</h1>
+        <p>Resumen visual de tus finanzas</p>
+      </header>
+
+      <main>
+        <div class="card">
+          <h3>Ingresos vs Gastos</h3>
+          <div class="grafico">
+            Próximamente gráfico 📊
+          </div>
         </div>
-        <div class="estadistica-card">
-          <p>Gastos por categoría</p>
-          <div class="grafico-placeholder">[Gráfico aquí]</div>
+
+        <div class="card">
+          <h3>Distribución de gastos</h3>
+          <div class="grafico">
+            Próximamente gráfico 📉
+          </div>
         </div>
       </main>
     </div>
-  </body>
+
+  </div>
+</body>
 </html>

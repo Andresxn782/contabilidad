@@ -52,7 +52,13 @@ def panel(usuario_id):
     saldo = total_ingresos - total_gastos
 
     db.close()
-    return render_template('panel.html', usuario_id=usuario_id, ingresos=total_ingresos, gastos=total_gastos, saldo=saldo)
+    return render_template(
+        'panel.html',
+        usuario_id=usuario_id,
+        ingresos=total_ingresos,
+        gastos=total_gastos,
+        saldo=saldo
+    )
 
 
 # ------------------ INGRESOS ------------------
@@ -103,6 +109,80 @@ def nuevo_gasto(usuario_id):
     db.commit()
     db.close()
     return redirect(url_for('gastos', usuario_id=usuario_id))
+
+
+# =========================================================
+# ================== NUEVOS APARTADOS =====================
+# =========================================================
+
+# ------------------ PRESUPUESTOS ------------------
+@app.route('/presupuestos/<int:usuario_id>')
+def presupuestos(usuario_id):
+    db = obtener_db()
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT * FROM presupuestos WHERE usuario_id=%s ORDER BY fecha_inicio DESC",
+        (usuario_id,)
+    )
+    lista_presupuestos = cursor.fetchall()
+
+    db.close()
+    return render_template(
+        'presupuestos.html',
+        usuario_id=usuario_id,
+        presupuestos=lista_presupuestos
+    )
+
+
+# ------------------ ESTADÍSTICAS ------------------
+@app.route('/estadisticas/<int:usuario_id>')
+def estadisticas(usuario_id):
+    db = obtener_db()
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT COALESCE(SUM(cantidad),0) AS total FROM ingresos WHERE usuario_id=%s",
+        (usuario_id,)
+    )
+    ingresos = cursor.fetchone()['total']
+
+    cursor.execute(
+        "SELECT COALESCE(SUM(cantidad),0) AS total FROM gastos WHERE usuario_id=%s",
+        (usuario_id,)
+    )
+    gastos = cursor.fetchone()['total']
+
+    db.close()
+
+    return render_template(
+        'estadisticas.html',
+        usuario_id=usuario_id,
+        ingresos=ingresos,
+        gastos=gastos,
+        saldo=ingresos - gastos
+    )
+
+
+# ------------------ PERFIL ------------------
+@app.route('/perfil/<int:usuario_id>')
+def perfil(usuario_id):
+    db = obtener_db()
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT id, email, nombre FROM usuarios WHERE id=%s",
+        (usuario_id,)
+    )
+    usuario = cursor.fetchone()
+
+    db.close()
+
+    return render_template(
+        'perfil.html',
+        usuario_id=usuario_id,
+        usuario=usuario
+    )
 
 
 # ------------------ INICIAR SERVIDOR ------------------
