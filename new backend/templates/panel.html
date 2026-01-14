@@ -3,24 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <title>Panel | Contabilidad</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+  <style>
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+/* Layout general */
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 220px;
+  background: teal;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.sidebar a {
+  display: block;
+  margin: 15px 0;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Contenido */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Main */
+main {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+/* Saldo */
+.saldo {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+/* Fila de ingresos y gastos */
+.cards-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Colores */
+.ingreso {
+  background: #e0f7e0;
+  width: 250px;
+}
+
+.gasto {
+  background: #fde0e0;
+  width: 250px;
+}
+
+  </style>
 <body>
-  <header>
-    <h1>Panel de Control</h1>
-    <p>Usuario ID: {{ usuario_id }}</p>
-  </header>
-  <main>
-    <div class="resumen">
-      <p>Total ingresos: €{{ ingresos }}</p>
-      <p>Total gastos: €{{ gastos }}</p>
-      <p>Saldo: €{{ saldo }}</p>
+  <div class="layout">
+    
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+    </aside>
+
+    <!-- Contenido principal -->
+    <div class="content">
+      <header>
+        <h1>Panel de Control</h1>
+        <p>Usuario ID: {{ usuario_id }}</p>
+      </header>
+
+      <main>
+        <!-- Saldo -->
+        <div class="card saldo">
+          <h3>Saldo actual</h3>
+          <p>€{{ saldo }}</p>
+        </div>
+
+        <!-- Ingresos y Gastos -->
+        <div class="cards-row">
+          <div class="card ingreso">
+            <h3>Ingresos</h3>
+            <p>€{{ ingresos }}</p>
+          </div>
+
+          <div class="card gasto">
+            <h3>Gastos</h3>
+            <p>€{{ gastos }}</p>
+          </div>
+        </div>
+      </main>
     </div>
-    <nav>
-      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">Ingresos</a>
-      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">Gastos</a>
-    </nav>
-  </main>
+
+  </div>
 </body>
-</html>
+
 
