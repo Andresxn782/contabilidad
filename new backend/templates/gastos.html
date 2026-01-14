@@ -1,145 +1,189 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 -->
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Gastos | Contabilidad</title>
-  <style>
-    /* style.css */
-body, html {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Permite mostrar acentos y caracteres especiales -->
 
-header {
-  width: 800px;
-  margin: auto;
-  padding: 20px 0;
-  text-align: center;
-}
+    <title>Gastos | Contabilidad</title>
+    <!-- Título de la pestaña -->
 
-header h1 {
-  margin: 0;
-}
+    <style>
+      /* ============================
+       ESTILOS GENERALES
+    ============================ */
 
-main {
-  width: 800px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+      }
 
-/* Resumen del panel */
-.resumen p {
-  font-size: 18px;
-  margin: 10px 0;
-}
+      /* Cabecera */
+      header {
+        width: 800px;
+        margin: auto;
+        padding: 20px 0;
+        text-align: center;
+      }
 
-/* Lista de movimientos */
-.lista-movimientos {
-  margin-top: 20px;
-}
+      header h1 {
+        margin: 0;
+      }
 
-.movimiento {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
+      /* Contenedor principal */
+      main {
+        width: 800px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-.ingreso {
-  background: #e0f7e0;
-}
+      /* ============================
+   LISTA DE GASTOS
+============================ */
 
-.gasto {
-  background: #fde0e0;
-}
+      .lista-movimientos {
+        margin-top: 20px;
+      }
 
-/* Formularios para añadir ingreso/gasto */
-form {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+      /* Cada gasto individual */
+      .movimiento {
+        display: flex;
+        justify-content: space-between; /* separa columnas */
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
 
-form input[type="text"],
-form input[type="number"],
-form input[type="date"] {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+      /* Color específico para ingresos */
+      .ingreso {
+        background: #e0f7e0;
+      }
 
-form input[type="submit"] {
-  padding: 10px;
-  background: teal;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+      /* Color específico para gastos */
+      .gasto {
+        background: #fde0e0;
+      }
 
-form input[type="submit"]:hover {
-  background: #006666;
-}
+      /* ============================
+   FORMULARIO
+============================ */
 
-/* Botón flotante para añadir movimientos (opcional) */
-#nuevo {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: teal;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 30px;
-  line-height: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+      form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column; /* campos en columna */
+        gap: 10px;
+      }
 
-#nuevo:hover {
-  background: #006666;
-}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Gastos</h1>
-    <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
-  </header>
+      /* Campos de texto */
+      form input[type='text'],
+      form input[type='number'],
+      form input[type='date'] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
 
-  <main>
-    <div class="lista-movimientos">
-      {% for gasto in gastos %}
+      /* Botón de envío */
+      form input[type='submit'] {
+        padding: 10px;
+        background: teal;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Efecto hover en botón */
+      form input[type='submit']:hover {
+        background: #006666;
+      }
+
+      /* ============================
+   BOTÓN FLOTANTE (opcional)
+============================ */
+
+      #nuevo {
+        position: fixed; /* queda fijo en pantalla */
+        bottom: 20px;
+        right: 20px;
+        background: teal;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        line-height: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      #nuevo:hover {
+        background: #006666;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Cabecera -->
+    <header>
+      <h1>Gastos</h1>
+
+      <!-- Enlace para volver al panel -->
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+      <!-- Lista dinámica de gastos -->
+      <div class="lista-movimientos">
+        <!-- Bucle Jinja: recorre la lista de gastos enviada desde Flask -->
+        {% for gasto in gastos %}
+
         <div class="movimiento gasto">
+          <!-- Nombre del gasto -->
           <span>{{ gasto.nombre }}</span>
+
+          <!-- Cantidad en negativo -->
           <span>- €{{ gasto.cantidad }}</span>
+
+          <!-- Fecha del gasto -->
           <span>{{ gasto.date }}</span>
         </div>
-      {% endfor %}
-    </div>
 
-    <h2>Añadir gasto</h2>
-    <form action="{{ url_for('nuevo_gasto', usuario_id=usuario_id) }}" method="POST">
-      <input type="text" name="nombre" placeholder="Nombre del gasto" required>
-      <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required>
-      <input type="date" name="date" required>
-      <input type="text" name="nota" placeholder="Nota (opcional)">
-      <input type="submit" value="Añadir gasto">
-    </form>
-  </main>
-</body>
+        {% endfor %}
+      </div>
+
+      <!-- Formulario para añadir nuevo gasto -->
+      <h2>Añadir gasto</h2>
+
+      <form action="{{ url_for('nuevo_gasto', usuario_id=usuario_id) }}" method="POST">
+        <!-- Nombre del gasto -->
+        <input type="text" name="nombre" placeholder="Nombre del gasto" required />
+
+        <!-- Cantidad del gasto -->
+        <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required />
+
+        <!-- Fecha -->
+        <input type="date" name="date" required />
+
+        <!-- Nota opcional -->
+        <input type="text" name="nota" placeholder="Nota (opcional)" />
+
+        <!-- Botón de envío -->
+        <input type="submit" value="Añadir gasto" />
+      </form>
+    </main>
+  </body>
 </html>
-

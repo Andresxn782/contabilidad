@@ -1,38 +1,65 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 -->
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!-- Permite mostrar acentos y caracteres especiales -->
+
     <title>Perfil | Aplicación de Cuentas</title>
+    <!-- Título que aparece en la pestaña -->
+
+    <!-- Enlace a la hoja de estilos externa -->
     <link rel="stylesheet" href="estilo/style.css" />
   </head>
+
   <body>
+    <!-- Contenedor principal de la app -->
     <div class="app">
+      <!-- ============================
+           BARRA LATERAL
+      ============================ -->
       <aside class="sidebar">
+        <!-- Logo o nombre de la aplicación -->
         <h2 class="logo">A P C</h2>
+
+        <!-- Menú de navegación -->
         <nav>
           <a href="../../../panel/index.html">Dashboard</a>
           <a href="../ingresos/ingresos.html">Ingresos</a>
           <a href="../gastos/gastos.html">Gastos</a>
           <a href="../presupuestos/presupuestos.html">Presupuesto</a>
           <a href="../estadisticas/estadisticas.html">Estadísticas</a>
+          <!-- La página actual se marca como activa -->
           <a class="active" href="perfil.html">Perfil</a>
         </nav>
       </aside>
 
+      <!-- ============================
+           CONTENIDO PRINCIPAL
+      ============================ -->
       <main class="content">
+        <!-- Título de la sección -->
         <h2>Perfil</h2>
+
+        <!-- Tarjeta con el nombre del usuario -->
         <div class="perfil-card">
           <p>Usuario:</p>
           <h3>Juan Pérez</h3>
         </div>
+
+        <!-- Tarjeta con el email -->
         <div class="perfil-card">
           <p>Email:</p>
           <h3>juan@email.com</h3>
         </div>
+
+        <!-- Tarjeta con la contraseña (oculta) -->
         <div class="perfil-card">
           <p>Contraseña:</p>
           <h3>********</h3>
         </div>
+
+        <!-- Botón para editar el perfil -->
         <button class="editar-btn">Editar perfil</button>
       </main>
     </div>

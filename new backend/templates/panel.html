@@ -1,147 +1,167 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 -->
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Panel | Contabilidad</title>
-  <style>
-body, html {
-  margin: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Permite mostrar correctamente acentos y caracteres especiales -->
 
-/* Layout general */
-.layout {
-  display: flex;
-  height: 100vh;
-}
+    <title>Panel | Contabilidad</title>
+    <!-- Título que aparece en la pestaña del navegador -->
 
-/* Barra lateral */
-.sidebar {
-  width: 220px;
-  background: teal;
-  color: white;
-  padding: 20px;
-  box-sizing: border-box;
-}
+    <style>
+      /* Estilos generales para todo el documento */
+      body,
+      html {
+        margin: 0; /* elimina márgenes por defecto */
+        height: 100%; /* ocupa toda la altura */
+        font-family: Arial, sans-serif; /* tipo de letra */
+        background: #f4f6f8; /* color de fondo */
+      }
 
-.sidebar h2 {
-  margin-top: 0;
-  text-align: center;
-}
+      /* Layout general: divide pantalla en sidebar + contenido */
+      .layout {
+        display: flex; /* coloca elementos en fila */
+        height: 100vh; /* altura total de la pantalla */
+      }
 
-.sidebar a {
-  display: block;
-  margin: 15px 0;
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-}
+      /* Barra lateral izquierda */
+      .sidebar {
+        width: 220px; /* ancho fijo */
+        background: teal; /* color de fondo */
+        color: white; /* texto blanco */
+        padding: 20px;
+        box-sizing: border-box;
+      }
 
-.sidebar a:hover {
-  text-decoration: underline;
-}
+      /* Título del menú */
+      .sidebar h2 {
+        margin-top: 0;
+        text-align: center;
+      }
 
-/* Contenido */
-.content {
-  flex: 1;
-  padding: 30px;
-}
+      /* Enlaces del menú */
+      .sidebar a {
+        display: block; /* cada enlace ocupa una línea */
+        margin: 15px 0;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
 
-/* Header */
-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
+      /* Efecto al pasar el ratón */
+      .sidebar a:hover {
+        text-decoration: underline;
+      }
 
-/* Main */
-main {
-  max-width: 800px;
-  margin: auto;
-}
+      /* Área de contenido principal */
+      .content {
+        flex: 1; /* ocupa el resto del espacio */
+        padding: 30px;
+      }
 
-/* Cards */
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+      /* Encabezado */
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-.card h3 {
-  margin-top: 0;
-}
+      /* Área principal */
+      main {
+        max-width: 800px;
+        margin: auto; /* centra el contenido */
+      }
 
-/* Saldo */
-.saldo {
-  margin-bottom: 30px;
-  font-size: 24px;
-}
+      /* Tarjetas */
+      .card {
+        background: white;
+        border-radius: 10px; /* bordes redondeados */
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra */
+      }
 
-/* Fila de ingresos y gastos */
-.cards-row {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
+      .card h3 {
+        margin-top: 0;
+      }
 
-/* Colores */
-.ingreso {
-  background: #e0f7e0;
-  width: 250px;
-}
+      /* Tarjeta de saldo */
+      .saldo {
+        margin-bottom: 30px;
+        font-size: 24px;
+      }
 
-.gasto {
-  background: #fde0e0;
-  width: 250px;
-}
+      /* Fila que contiene ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px; /* separación entre tarjetas */
+        justify-content: center;
+      }
 
-  </style>
-<body>
-  <div class="layout">
-    
-    <!-- Barra lateral -->
-    <aside class="sidebar">
-      <h2>Menú</h2>
-      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
-      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
-      <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
-      <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
-      <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
-    </aside>
+      /* Colores de tarjetas */
+      .ingreso {
+        background: #e0f7e0;
+        width: 250px;
+      }
 
-    <!-- Contenido principal -->
-    <div class="content">
-      <header>
-        <h1>Panel de Control</h1>
-        <p>Usuario ID: {{ usuario_id }}</p>
-      </header>
+      .gasto {
+        background: #fde0e0;
+        width: 250px;
+      }
+    </style>
+  </head>
 
-      <main>
-        <!-- Saldo -->
-        <div class="card saldo">
-          <h3>Saldo actual</h3>
-          <p>€{{ saldo }}</p>
-        </div>
+  <body>
+    <!-- Contenedor general -->
+    <div class="layout">
+      <!-- Barra lateral de navegación -->
+      <aside class="sidebar">
+        <h2>Menú</h2>
 
-        <!-- Ingresos y Gastos -->
-        <div class="cards-row">
-          <div class="card ingreso">
-            <h3>Ingresos</h3>
-            <p>€{{ ingresos }}</p>
+        <!--
+        Enlaces generados por Flask con url_for
+        usuario_id se pasa como parámetro a la ruta
+      -->
+        <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+        <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+        <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
+        <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
+        <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
+      </aside>
+
+      <!-- Contenido principal -->
+      <div class="content">
+        <!-- Cabecera -->
+        <header>
+          <h1>Panel de Control</h1>
+
+          <!-- Muestra el ID del usuario enviado desde Flask -->
+          <p>Usuario ID: {{ usuario_id }}</p>
+        </header>
+
+        <main>
+          <!-- Tarjeta de saldo -->
+          <div class="card saldo">
+            <h3>Saldo actual</h3>
+            <p>€{{ saldo }}</p>
+            <!-- saldo viene desde el backend Flask -->
           </div>
 
-          <div class="card gasto">
-            <h3>Gastos</h3>
-            <p>€{{ gastos }}</p>
+          <!-- Tarjetas de ingresos y gastos -->
+          <div class="cards-row">
+            <div class="card ingreso">
+              <h3>Ingresos</h3>
+              <p>€{{ ingresos }}</p>
+              <!-- ingresos viene desde Flask -->
+            </div>
+
+            <div class="card gasto">
+              <h3>Gastos</h3>
+              <p>€{{ gastos }}</p>
+              <!-- gastos viene desde Flask -->
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
-
-  </div>
-</body>
-
-
+  </body>
+</html>

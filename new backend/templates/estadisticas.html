@@ -1,129 +1,146 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 -->
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Estadísticas | Contabilidad</title>
-  <style>
-    body, html {
-      margin: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Codificación para caracteres especiales -->
 
-    /* Layout general */
-    .layout {
-      display: flex;
-      height: 100vh;
-    }
+    <title>Estadísticas | Contabilidad</title>
+    <!-- Título de la pestaña -->
 
-    /* Barra lateral */
-    .sidebar {
-      width: 220px;
-      background: teal;
-      color: white;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+    <style>
+      /* Estilos generales */
+      body,
+      html {
+        margin: 0;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+      }
 
-    .sidebar h2 {
-      margin-top: 0;
-      text-align: center;
-    }
+      /* Layout general: sidebar + contenido */
+      .layout {
+        display: flex;
+        height: 100vh;
+      }
 
-    .sidebar a {
-      display: block;
-      margin: 15px 0;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
+      /* Barra lateral */
+      .sidebar {
+        width: 220px;
+        background: teal;
+        color: white;
+        padding: 20px;
+        box-sizing: border-box;
+      }
 
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
+      /* Título del menú */
+      .sidebar h2 {
+        margin-top: 0;
+        text-align: center;
+      }
 
-    /* Contenido */
-    .content {
-      flex: 1;
-      padding: 30px;
-    }
+      /* Enlaces del menú */
+      .sidebar a {
+        display: block;
+        margin: 15px 0;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
 
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+      /* Efecto hover */
+      .sidebar a:hover {
+        text-decoration: underline;
+      }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-    }
+      /* Área principal */
+      .content {
+        flex: 1;
+        padding: 30px;
+      }
 
-    /* Cards */
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 25px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-    }
+      /* Cabecera */
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
+      /* Contenedor principal */
+      main {
+        max-width: 900px;
+        margin: auto;
+      }
 
-    .grafico {
-      height: 180px;
-      background: #e0e0e0;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 18px;
-    }
-  </style>
-</head>
+      /* Tarjetas de estadísticas */
+      .card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+      }
 
-<body>
-  <div class="layout">
+      .card h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2>Menú</h2>
-      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">🏠 Panel</a>
-      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
-      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
-      <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
-      <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
-      <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
-    </aside>
+      /* Zona donde irá el gráfico */
+      .grafico {
+        height: 180px;
+        background: #e0e0e0;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        font-size: 18px;
+      }
+    </style>
+  </head>
 
-    <!-- Contenido -->
-    <div class="content">
-      <header>
-        <h1>Estadísticas</h1>
-        <p>Resumen visual de tus finanzas</p>
-      </header>
+  <body>
+    <!-- Contenedor general -->
+    <div class="layout">
+      <!-- Barra lateral de navegación -->
+      <aside class="sidebar">
+        <h2>Menú</h2>
 
-      <main>
-        <div class="card">
-          <h3>Ingresos vs Gastos</h3>
-          <div class="grafico">
-            Próximamente gráfico 📊
+        <!-- Enlaces dinámicos con Flask -->
+        <a href="{{ url_for('panel', usuario_id=usuario_id) }}">🏠 Panel</a>
+        <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+        <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+        <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
+        <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
+        <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
+      </aside>
+
+      <!-- Contenido principal -->
+      <div class="content">
+        <!-- Encabezado -->
+        <header>
+          <h1>Estadísticas</h1>
+          <p>Resumen visual de tus finanzas</p>
+        </header>
+
+        <main>
+          <!-- Tarjeta 1 -->
+          <div class="card">
+            <h3>Ingresos vs Gastos</h3>
+
+            <!-- Aquí luego irá un gráfico real -->
+            <div class="grafico">Próximamente gráfico 📊</div>
           </div>
-        </div>
 
-        <div class="card">
-          <h3>Distribución de gastos</h3>
-          <div class="grafico">
-            Próximamente gráfico 📉
+          <!-- Tarjeta 2 -->
+          <div class="card">
+            <h3>Distribución de gastos</h3>
+
+            <!-- Zona del segundo gráfico -->
+            <div class="grafico">Próximamente gráfico 📉</div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
-
-  </div>
-</body>
+  </body>
 </html>

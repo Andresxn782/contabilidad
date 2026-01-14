@@ -1,34 +1,59 @@
 <!DOCTYPE html>
+<!-- Documento HTML5 -->
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!-- Codificación para mostrar correctamente acentos y caracteres especiales -->
+
     <title>Presupuesto | Aplicación de Cuentas</title>
+    <!-- Título de la pestaña -->
+
+    <!-- Enlace a hoja de estilos externa -->
     <link rel="stylesheet" href="estilo/style.css" />
   </head>
+
   <body>
+    <!-- Contenedor principal de la aplicación -->
     <div class="app">
+      <!-- ============================
+           BARRA LATERAL
+      ============================ -->
       <aside class="sidebar">
+        <!-- Logo de la app -->
         <h2 class="logo">A P C</h2>
+
+        <!-- Menú de navegación -->
         <nav>
           <a href="../../../panel/index.html">Dashboard</a>
           <a href="../ingresos/ingresos.html">Ingresos</a>
           <a href="../gastos/gastos.html">Gastos</a>
+          <!-- Página actual marcada como activa -->
           <a class="active" href="../presupuestos/presupuestos.html">Presupuesto</a>
           <a href="../estadisticas/estadisticas.html">Estadísticas</a>
           <a href="../perfil/perfil.html">Perfil</a>
         </nav>
       </aside>
 
+      <!-- ============================
+           CONTENIDO PRINCIPAL
+      ============================ -->
       <main class="content">
+        <!-- Título de la sección -->
         <h2>Presupuesto Mensual</h2>
+
+        <!-- Tarjeta de ingresos previstos -->
         <div class="presupuesto-card">
           <p>Ingresos previstos</p>
           <h3>€1.500,00</h3>
         </div>
+
+        <!-- Tarjeta de gastos previstos -->
         <div class="presupuesto-card">
           <p>Gastos previstos</p>
           <h3>€1.000,00</h3>
         </div>
+
+        <!-- Tarjeta de saldo estimado -->
         <div class="presupuesto-card">
           <p>Saldo estimado</p>
           <h3>€500,00</h3>
