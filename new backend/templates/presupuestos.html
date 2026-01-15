@@ -1,64 +1,133 @@
 <!DOCTYPE html>
-<!-- Documento HTML5 -->
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Codificación para mostrar correctamente acentos y caracteres especiales -->
+<head>
+  <meta charset="UTF-8">
+  <title>Presupuestos | Contabilidad</title>
 
-    <title>Presupuesto | Aplicación de Cuentas</title>
-    <!-- Título de la pestaña -->
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+    }
 
-    <!-- Enlace a hoja de estilos externa -->
-    <link rel="stylesheet" href="estilo/style.css" />
-  </head>
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
 
-  <body>
-    <!-- Contenedor principal de la aplicación -->
-    <div class="app">
-      <!-- ============================
-           BARRA LATERAL
-      ============================ -->
-      <aside class="sidebar">
-        <!-- Logo de la app -->
-        <h2 class="logo">A P C</h2>
+    .sidebar {
+      width: 220px;
+      background: teal;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-        <!-- Menú de navegación -->
-        <nav>
-          <a href="../../../panel/index.html">Dashboard</a>
-          <a href="../ingresos/ingresos.html">Ingresos</a>
-          <a href="../gastos/gastos.html">Gastos</a>
-          <!-- Página actual marcada como activa -->
-          <a class="active" href="../presupuestos/presupuestos.html">Presupuesto</a>
-          <a href="../estadisticas/estadisticas.html">Estadísticas</a>
-          <a href="../perfil/perfil.html">Perfil</a>
-        </nav>
-      </aside>
+    .sidebar h2 {
+      text-align: center;
+      margin-top: 0;
+    }
 
-      <!-- ============================
-           CONTENIDO PRINCIPAL
-      ============================ -->
-      <main class="content">
-        <!-- Título de la sección -->
-        <h2>Presupuesto Mensual</h2>
+    .sidebar a {
+      display: block;
+      margin: 15px 0;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
 
-        <!-- Tarjeta de ingresos previstos -->
-        <div class="presupuesto-card">
-          <p>Ingresos previstos</p>
-          <h3>€1.500,00</h3>
-        </div>
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
 
-        <!-- Tarjeta de gastos previstos -->
-        <div class="presupuesto-card">
-          <p>Gastos previstos</p>
-          <h3>€1.000,00</h3>
-        </div>
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
 
-        <!-- Tarjeta de saldo estimado -->
-        <div class="presupuesto-card">
-          <p>Saldo estimado</p>
-          <h3>€500,00</h3>
-        </div>
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    main {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th {
+      background: teal;
+      color: white;
+      padding: 12px;
+    }
+
+    td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">🏠 Panel</a>
+      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+      <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
+      <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
+      <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
+    </aside>
+
+    <div class="content">
+      <header>
+        <h1>Presupuestos</h1>
+      </header>
+
+      <main>
+        <table>
+          <tr>
+            <th>Cantidad</th>
+            <th>Periodo</th>
+          </tr>
+
+          {% for p in presupuestos %}
+          <tr>
+            <td>€{{ p.cantidad }}</td>
+            <td>{{ p.periodo }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="2">No hay presupuestos registrados</td>
+          </tr>
+          {% endfor %}
+        </table>
       </main>
     </div>
-  </body>
+
+  </div>
+</body>
 </html>

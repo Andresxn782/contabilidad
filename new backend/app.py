@@ -7,7 +7,7 @@ app = Flask(__name__)
 def obtener_db():
     return pymysql.connect(
         host="localhost",
-        user="usuario_app",  # usuario que creaste en MySQL
+        user="usuario_app",
         password="Contabilidad123$",
         database="contabilidad",
         cursorclass=pymysql.cursors.DictCursor
@@ -22,12 +22,14 @@ def login():
 
         db = obtener_db()
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM usuarios WHERE email=%s AND password=%s", (email, password))
+        cursor.execute(
+            "SELECT * FROM usuarios WHERE email=%s AND password=%s",
+            (email, password)
+        )
         user = cursor.fetchone()
         db.close()
 
         if user:
-            # Guardar usuario_id en sesión o redirigir directamente
             return redirect(url_for('panel', usuario_id=user['id']))
         else:
             return render_template('login.html', error="Usuario o contraseña incorrectos")
@@ -41,17 +43,21 @@ def panel(usuario_id):
     db = obtener_db()
     cursor = db.cursor()
 
-    # Obtener total ingresos
-    cursor.execute("SELECT COALESCE(SUM(cantidad),0) as total FROM ingresos WHERE usuario_id=%s", (usuario_id,))
+    cursor.execute(
+        "SELECT COALESCE(SUM(cantidad),0) as total FROM ingresos WHERE usuario_id=%s",
+        (usuario_id,)
+    )
     total_ingresos = cursor.fetchone()['total']
 
-    # Obtener total gastos
-    cursor.execute("SELECT COALESCE(SUM(cantidad),0) as total FROM gastos WHERE usuario_id=%s", (usuario_id,))
+    cursor.execute(
+        "SELECT COALESCE(SUM(cantidad),0) as total FROM gastos WHERE usuario_id=%s",
+        (usuario_id,)
+    )
     total_gastos = cursor.fetchone()['total']
 
     saldo = total_ingresos - total_gastos
-
     db.close()
+
     return render_template(
         'panel.html',
         usuario_id=usuario_id,
@@ -66,10 +72,18 @@ def panel(usuario_id):
 def ingresos(usuario_id):
     db = obtener_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM ingresos WHERE usuario_id=%s ORDER BY date DESC", (usuario_id,))
+    cursor.execute(
+        "SELECT * FROM ingresos WHERE usuario_id=%s ORDER BY date DESC",
+        (usuario_id,)
+    )
     lista_ingresos = cursor.fetchall()
     db.close()
-    return render_template('ingresos.html', usuario_id=usuario_id, ingresos=lista_ingresos)
+
+    return render_template(
+        'ingresos.html',
+        usuario_id=usuario_id,
+        ingresos=lista_ingresos
+    )
 
 
 @app.route('/ingresos/<int:usuario_id>/nuevo', methods=['POST'])
@@ -91,10 +105,18 @@ def nuevo_ingreso(usuario_id):
 def gastos(usuario_id):
     db = obtener_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM gastos WHERE usuario_id=%s ORDER BY date DESC", (usuario_id,))
+    cursor.execute(
+        "SELECT * FROM gastos WHERE usuario_id=%s ORDER BY date DESC",
+        (usuario_id,)
+    )
     lista_gastos = cursor.fetchall()
     db.close()
-    return render_template('gastos.html', usuario_id=usuario_id, gastos=lista_gastos)
+
+    return render_template(
+        'gastos.html',
+        usuario_id=usuario_id,
+        gastos=lista_gastos
+    )
 
 
 @app.route('/gastos/<int:usuario_id>/nuevo', methods=['POST'])
@@ -112,22 +134,22 @@ def nuevo_gasto(usuario_id):
 
 
 # =========================================================
-# ================== NUEVOS APARTADOS =====================
+# ================== PRESUPUESTOS =========================
 # =========================================================
 
-# ------------------ PRESUPUESTOS ------------------
 @app.route('/presupuestos/<int:usuario_id>')
 def presupuestos(usuario_id):
     db = obtener_db()
     cursor = db.cursor()
 
+    # 🔧 FIX: tu tabla NO tiene fecha_inicio
     cursor.execute(
-        "SELECT * FROM presupuestos WHERE usuario_id=%s ORDER BY fecha_inicio DESC",
+        "SELECT * FROM presupuestos WHERE usuario_id=%s ORDER BY id DESC",
         (usuario_id,)
     )
     lista_presupuestos = cursor.fetchall()
-
     db.close()
+
     return render_template(
         'presupuestos.html',
         usuario_id=usuario_id,
@@ -135,7 +157,10 @@ def presupuestos(usuario_id):
     )
 
 
-# ------------------ ESTADÍSTICAS ------------------
+# =========================================================
+# ================== ESTADÍSTICAS =========================
+# =========================================================
+
 @app.route('/estadisticas/<int:usuario_id>')
 def estadisticas(usuario_id):
     db = obtener_db()
@@ -164,18 +189,21 @@ def estadisticas(usuario_id):
     )
 
 
-# ------------------ PERFIL ------------------
+# =========================================================
+# ================== PERFIL ===============================
+# =========================================================
+
 @app.route('/perfil/<int:usuario_id>')
 def perfil(usuario_id):
     db = obtener_db()
     cursor = db.cursor()
 
+    # 🔧 FIX: la tabla usuarios NO tiene columna "nombre"
     cursor.execute(
-        "SELECT id, email, nombre FROM usuarios WHERE id=%s",
+        "SELECT id, email FROM usuarios WHERE id=%s",
         (usuario_id,)
     )
     usuario = cursor.fetchone()
-
     db.close()
 
     return render_template(

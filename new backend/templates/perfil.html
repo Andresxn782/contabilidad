@@ -1,67 +1,131 @@
 <!DOCTYPE html>
-<!-- Documento HTML5 -->
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Permite mostrar acentos y caracteres especiales -->
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil | Contabilidad</title>
 
-    <title>Perfil | Aplicación de Cuentas</title>
-    <!-- Título que aparece en la pestaña -->
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+    }
 
-    <!-- Enlace a la hoja de estilos externa -->
-    <link rel="stylesheet" href="estilo/style.css" />
-  </head>
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
 
-  <body>
-    <!-- Contenedor principal de la app -->
-    <div class="app">
-      <!-- ============================
-           BARRA LATERAL
-      ============================ -->
-      <aside class="sidebar">
-        <!-- Logo o nombre de la aplicación -->
-        <h2 class="logo">A P C</h2>
+    .sidebar {
+      width: 220px;
+      background: teal;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-        <!-- Menú de navegación -->
-        <nav>
-          <a href="../../../panel/index.html">Dashboard</a>
-          <a href="../ingresos/ingresos.html">Ingresos</a>
-          <a href="../gastos/gastos.html">Gastos</a>
-          <a href="../presupuestos/presupuestos.html">Presupuesto</a>
-          <a href="../estadisticas/estadisticas.html">Estadísticas</a>
-          <!-- La página actual se marca como activa -->
-          <a class="active" href="perfil.html">Perfil</a>
-        </nav>
-      </aside>
+    .sidebar h2 {
+      text-align: center;
+      margin-top: 0;
+    }
 
-      <!-- ============================
-           CONTENIDO PRINCIPAL
-      ============================ -->
-      <main class="content">
-        <!-- Título de la sección -->
-        <h2>Perfil</h2>
+    .sidebar a {
+      display: block;
+      margin: 15px 0;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
 
-        <!-- Tarjeta con el nombre del usuario -->
-        <div class="perfil-card">
-          <p>Usuario:</p>
-          <h3>Juan Pérez</h3>
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card p {
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .editar-btn {
+      width: 100%;
+      padding: 12px;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .editar-btn:hover {
+      background: #006d6d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">🏠 Panel</a>
+      <a href="{{ url_for('ingresos', usuario_id=usuario_id) }}">💰 Ingresos</a>
+      <a href="{{ url_for('gastos', usuario_id=usuario_id) }}">💸 Gastos</a>
+      <a href="{{ url_for('presupuestos', usuario_id=usuario_id) }}">📅 Presupuestos</a>
+      <a href="{{ url_for('estadisticas', usuario_id=usuario_id) }}">📈 Estadísticas</a>
+      <a href="{{ url_for('perfil', usuario_id=usuario_id) }}">👤 Perfil</a>
+    </aside>
+
+    <div class="content">
+      <header>
+        <h1>Perfil de usuario</h1>
+      </header>
+
+      <main>
+        <div class="card">
+          <p>ID de usuario</p>
+          <h3>{{ usuario.id }}</h3>
         </div>
 
-        <!-- Tarjeta con el email -->
-        <div class="perfil-card">
-          <p>Email:</p>
-          <h3>juan@email.com</h3>
+        <div class="card">
+          <p>Email</p>
+          <h3>{{ usuario.email }}</h3>
         </div>
 
-        <!-- Tarjeta con la contraseña (oculta) -->
-        <div class="perfil-card">
-          <p>Contraseña:</p>
+        <div class="card">
+          <p>Contraseña</p>
           <h3>********</h3>
         </div>
 
-        <!-- Botón para editar el perfil -->
         <button class="editar-btn">Editar perfil</button>
       </main>
     </div>
-  </body>
+
+  </div>
+</body>
 </html>
