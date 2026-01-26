@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Documento HTML5 -->
 <html lang="es">
   <head>
@@ -9,128 +9,222 @@
     <!-- Título de la pestaña -->
 
     <style>
-      /* ============================
-       ESTILOS GENERALES
-    ============================ */
+      /* Reset básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
       body,
       html {
-        width: 100%;
         height: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: #f9f9f9;
+        background: #f0f2f5;
+        color: #333;
       }
 
-      /* Cabecera */
-      header {
-        width: 800px;
-        margin: auto;
-        padding: 20px 0;
+      /* Layout principal */
+      .layout,
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Barra lateral */
+      .sidebar {
+        width: 240px;
+        background: #1c1f34; /* azul oscuro moderno */
+        color: white;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar h2 {
         text-align: center;
+        margin-bottom: 40px;
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .sidebar a {
+        display: block;
+        margin: 12px 0;
+        padding: 12px 15px;
+        color: #c0c0c0;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .sidebar a:hover {
+        background: #2e3173;
+        color: #ffffff;
+      }
+
+      .sidebar a.active {
+        background: #4a4ff8;
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      /* Contenido principal */
+      .content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 30px;
       }
 
       header h1 {
-        margin: 0;
+        font-size: 28px;
+        margin-bottom: 10px;
       }
 
-      /* Contenedor principal */
+      header p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Main cards */
       main {
-        width: 800px;
+        max-width: 900px;
         margin: auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      /* ============================
-   LISTA DE GASTOS
-============================ */
-
-      .lista-movimientos {
-        margin-top: 20px;
-      }
-
-      /* Cada gasto individual */
-      .movimiento {
         display: flex;
-        justify-content: space-between; /* separa columnas */
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-        border-radius: 5px;
-        margin-bottom: 5px;
+        flex-direction: column;
+        gap: 25px;
       }
 
-      /* Color específico para ingresos */
-      .ingreso {
-        background: #e0f7e0;
-      }
-
-      /* Color específico para gastos */
-      .gasto {
-        background: #fde0e0;
-      }
-
-      /* ============================
-   FORMULARIO
-============================ */
-
-      form {
-        margin-top: 20px;
+      .card,
+      .presupuesto-card,
+      .perfil-card,
+      .estadistica-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         display: flex;
-        flex-direction: column; /* campos en columna */
+        flex-direction: column;
         gap: 10px;
       }
 
-      /* Campos de texto */
-      form input[type='text'],
-      form input[type='number'],
-      form input[type='date'] {
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+      .card h3,
+      .presupuesto-card h3,
+      .perfil-card h3,
+      .estadistica-card h3 {
+        font-size: 22px;
+        font-weight: 600;
       }
 
-      /* Botón de envío */
-      form input[type='submit'] {
-        padding: 10px;
-        background: teal;
+      .card p,
+      .presupuesto-card p,
+      .perfil-card p,
+      .estadistica-card p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Saldo */
+      .saldo {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        color: #333;
+      }
+
+      /* Fila de ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .ingreso {
+        background: #daf5e5; /* verde suave */
+        color: #2a7f4f;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .gasto {
+        background: #fddede; /* rojo suave */
+        color: #b82a2a;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* Presupuesto */
+      .presupuesto-card h3 {
+        color: #1c1f34;
+      }
+
+      /* Perfil */
+      .perfil-card h3 {
+        color: #1c1f34;
+      }
+
+      .editar-btn {
+        background: #4a4ff8;
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 16px;
         cursor: pointer;
+        align-self: start;
+        transition: background 0.3s ease;
       }
 
-      /* Efecto hover en botón */
-      form input[type='submit']:hover {
-        background: #006666;
+      .editar-btn:hover {
+        background: #2e31d1;
       }
 
-      /* ============================
-   BOTÓN FLOTANTE (opcional)
-============================ */
-
-      #nuevo {
-        position: fixed; /* queda fijo en pantalla */
-        bottom: 20px;
-        right: 20px;
-        background: teal;
-        color: white;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 30px;
-        line-height: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      /* Estadísticas */
+      .grafico-placeholder {
+        height: 180px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #777;
+        font-weight: 500;
       }
 
-      #nuevo:hover {
-        background: #006666;
+      /* Responsive */
+      @media (max-width: 768px) {
+        .layout,
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-around;
+          padding: 20px 10px;
+        }
+
+        .sidebar a {
+          margin: 0;
+        }
+
+        .cards-row {
+          flex-direction: column;
+          align-items: center;
+        }
       }
     </style>
   </head>

@@ -1,144 +1,253 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Ingresos | Contabilidad</title>
-  <style>
-    /* style.css */
-body, html {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ingresos | Contabilidad</title>
+    <style>
+      /* Reset básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-header {
-  width: 800px;
-  margin: auto;
-  padding: 20px 0;
-  text-align: center;
-}
+      body,
+      html {
+        height: 100%;
+        background: #f0f2f5;
+        color: #333;
+      }
 
-header h1 {
-  margin: 0;
-}
+      /* Layout principal */
+      .layout,
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
 
-main {
-  width: 800px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+      /* Barra lateral */
+      .sidebar {
+        width: 240px;
+        background: #1c1f34; /* azul oscuro moderno */
+        color: white;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+      }
 
-/* Resumen del panel */
-.resumen p {
-  font-size: 18px;
-  margin: 10px 0;
-}
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #ffffff;
+      }
 
-/* Lista de movimientos */
-.lista-movimientos {
-  margin-top: 20px;
-}
+      .sidebar a {
+        display: block;
+        margin: 12px 0;
+        padding: 12px 15px;
+        color: #c0c0c0;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+      }
 
-.movimiento {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
+      .sidebar a:hover {
+        background: #2e3173;
+        color: #ffffff;
+      }
 
-.ingreso {
-  background: #e0f7e0;
-}
+      .sidebar a.active {
+        background: #4a4ff8;
+        color: #ffffff;
+        font-weight: bold;
+      }
 
-.gasto {
-  background: #fde0e0;
-}
+      /* Contenido principal */
+      .content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
 
-/* Formularios para añadir ingreso/gasto */
-form {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-form input[type="text"],
-form input[type="number"],
-form input[type="date"] {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+      header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
 
-form input[type="submit"] {
-  padding: 10px;
-  background: teal;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+      header p {
+        color: #555;
+        font-size: 16px;
+      }
 
-form input[type="submit"]:hover {
-  background: #006666;
-}
+      /* Main cards */
+      main {
+        max-width: 900px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
 
-/* Botón flotante para añadir movimientos (opcional) */
-#nuevo {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: teal;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 30px;
-  line-height: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+      .card,
+      .presupuesto-card,
+      .perfil-card,
+      .estadistica-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
 
-#nuevo:hover {
-  background: #006666;
-}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Ingresos</h1>
-    <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
-  </header>
+      .card h3,
+      .presupuesto-card h3,
+      .perfil-card h3,
+      .estadistica-card h3 {
+        font-size: 22px;
+        font-weight: 600;
+      }
 
-  <main>
-    <div class="lista-movimientos">
-      {% for ingreso in ingresos %}
+      .card p,
+      .presupuesto-card p,
+      .perfil-card p,
+      .estadistica-card p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Saldo */
+      .saldo {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        color: #333;
+      }
+
+      /* Fila de ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .ingreso {
+        background: #daf5e5; /* verde suave */
+        color: #2a7f4f;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .gasto {
+        background: #fddede; /* rojo suave */
+        color: #b82a2a;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* Presupuesto */
+      .presupuesto-card h3 {
+        color: #1c1f34;
+      }
+
+      /* Perfil */
+      .perfil-card h3 {
+        color: #1c1f34;
+      }
+
+      .editar-btn {
+        background: #4a4ff8;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        align-self: start;
+        transition: background 0.3s ease;
+      }
+
+      .editar-btn:hover {
+        background: #2e31d1;
+      }
+
+      /* Estadísticas */
+      .grafico-placeholder {
+        height: 180px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #777;
+        font-weight: 500;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .layout,
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-around;
+          padding: 20px 10px;
+        }
+
+        .sidebar a {
+          margin: 0;
+        }
+
+        .cards-row {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Ingresos</h1>
+      <a href="{{ url_for('panel', usuario_id=usuario_id) }}">Volver al panel</a>
+    </header>
+
+    <main>
+      <div class="lista-movimientos">
+        {% for ingreso in ingresos %}
         <div class="movimiento ingreso">
           <span>{{ ingreso.nombre }}</span>
           <span>+ €{{ ingreso.cantidad }}</span>
           <span>{{ ingreso.date }}</span>
         </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
 
-    <h2>Añadir ingreso</h2>
-    <form action="{{ url_for('nuevo_ingreso', usuario_id=usuario_id) }}" method="POST">
-      <input type="text" name="nombre" placeholder="Nombre del ingreso" required>
-      <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required>
-      <input type="date" name="date" required>
-      <input type="text" name="nota" placeholder="Nota (opcional)">
-      <input type="submit" value="Añadir ingreso">
-    </form>
-  </main>
-</body>
+      <h2>Añadir ingreso</h2>
+      <form action="{{ url_for('nuevo_ingreso', usuario_id=usuario_id) }}" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre del ingreso" required />
+        <input type="number" step="0.01" name="cantidad" placeholder="Cantidad" required />
+        <input type="date" name="date" required />
+        <input type="text" name="nota" placeholder="Nota (opcional)" />
+        <input type="submit" value="Añadir ingreso" />
+      </form>
+    </main>
+  </body>
 </html>

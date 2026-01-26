@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Documento HTML5 -->
 <html lang="es">
   <head>
@@ -9,103 +9,222 @@
     <!-- Título que aparece en la pestaña del navegador -->
 
     <style>
-      /* Estilos generales para todo el documento */
+      /* Reset básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
       body,
       html {
-        margin: 0; /* elimina márgenes por defecto */
-        height: 100%; /* ocupa toda la altura */
-        font-family: Arial, sans-serif; /* tipo de letra */
-        background: #f4f6f8; /* color de fondo */
+        height: 100%;
+        background: #f0f2f5;
+        color: #333;
       }
 
-      /* Layout general: divide pantalla en sidebar + contenido */
-      .layout {
-        display: flex; /* coloca elementos en fila */
-        height: 100vh; /* altura total de la pantalla */
+      /* Layout principal */
+      .layout,
+      .app {
+        display: flex;
+        min-height: 100vh;
       }
 
-      /* Barra lateral izquierda */
+      /* Barra lateral */
       .sidebar {
-        width: 220px; /* ancho fijo */
-        background: teal; /* color de fondo */
-        color: white; /* texto blanco */
-        padding: 20px;
-        box-sizing: border-box;
-      }
-
-      /* Título del menú */
-      .sidebar h2 {
-        margin-top: 0;
-        text-align: center;
-      }
-
-      /* Enlaces del menú */
-      .sidebar a {
-        display: block; /* cada enlace ocupa una línea */
-        margin: 15px 0;
+        width: 240px;
+        background: #1c1f34; /* azul oscuro moderno */
         color: white;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .sidebar a {
+        display: block;
+        margin: 12px 0;
+        padding: 12px 15px;
+        color: #c0c0c0;
         text-decoration: none;
         font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
       }
 
-      /* Efecto al pasar el ratón */
       .sidebar a:hover {
-        text-decoration: underline;
+        background: #2e3173;
+        color: #ffffff;
       }
 
-      /* Área de contenido principal */
+      .sidebar a.active {
+        background: #4a4ff8;
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      /* Contenido principal */
       .content {
-        flex: 1; /* ocupa el resto del espacio */
-        padding: 30px;
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
       }
 
-      /* Encabezado */
+      /* Header */
       header {
         text-align: center;
         margin-bottom: 30px;
       }
 
-      /* Área principal */
+      header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Main cards */
       main {
-        max-width: 800px;
-        margin: auto; /* centra el contenido */
+        max-width: 900px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
       }
 
-      /* Tarjetas */
-      .card {
-        background: white;
-        border-radius: 10px; /* bordes redondeados */
-        padding: 25px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra */
+      .card,
+      .presupuesto-card,
+      .perfil-card,
+      .estadistica-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .card h3 {
-        margin-top: 0;
+      .card h3,
+      .presupuesto-card h3,
+      .perfil-card h3,
+      .estadistica-card h3 {
+        font-size: 22px;
+        font-weight: 600;
       }
 
-      /* Tarjeta de saldo */
+      .card p,
+      .presupuesto-card p,
+      .perfil-card p,
+      .estadistica-card p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Saldo */
       .saldo {
-        margin-bottom: 30px;
-        font-size: 24px;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        color: #333;
       }
 
-      /* Fila que contiene ingresos y gastos */
+      /* Fila de ingresos y gastos */
       .cards-row {
         display: flex;
-        gap: 20px; /* separación entre tarjetas */
+        gap: 20px;
+        flex-wrap: wrap;
         justify-content: center;
       }
 
-      /* Colores de tarjetas */
       .ingreso {
-        background: #e0f7e0;
-        width: 250px;
+        background: #daf5e5; /* verde suave */
+        color: #2a7f4f;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
       }
 
       .gasto {
-        background: #fde0e0;
-        width: 250px;
+        background: #fddede; /* rojo suave */
+        color: #b82a2a;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* Presupuesto */
+      .presupuesto-card h3 {
+        color: #1c1f34;
+      }
+
+      /* Perfil */
+      .perfil-card h3 {
+        color: #1c1f34;
+      }
+
+      .editar-btn {
+        background: #4a4ff8;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        align-self: start;
+        transition: background 0.3s ease;
+      }
+
+      .editar-btn:hover {
+        background: #2e31d1;
+      }
+
+      /* Estadísticas */
+      .grafico-placeholder {
+        height: 180px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #777;
+        font-weight: 500;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .layout,
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-around;
+          padding: 20px 10px;
+        }
+
+        .sidebar a {
+          margin: 0;
+        }
+
+        .cards-row {
+          flex-direction: column;
+          align-items: center;
+        }
       }
     </style>
   </head>

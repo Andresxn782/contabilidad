@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Documento HTML5 -->
 <html lang="es">
   <head>
@@ -9,92 +9,222 @@
     <!-- Título de la pestaña -->
 
     <style>
-      /* Estilos generales */
-      body,
-      html {
+      /* Reset básico */
+      * {
         margin: 0;
-        height: 100%;
-        font-family: Arial, sans-serif;
-        background: #f4f6f8;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 
-      /* Layout general: sidebar + contenido */
-      .layout {
+      body,
+      html {
+        height: 100%;
+        background: #f0f2f5;
+        color: #333;
+      }
+
+      /* Layout principal */
+      .layout,
+      .app {
         display: flex;
-        height: 100vh;
+        min-height: 100vh;
       }
 
       /* Barra lateral */
       .sidebar {
-        width: 220px;
-        background: teal;
+        width: 240px;
+        background: #1c1f34; /* azul oscuro moderno */
         color: white;
-        padding: 20px;
-        box-sizing: border-box;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
       }
 
-      /* Título del menú */
       .sidebar h2 {
-        margin-top: 0;
         text-align: center;
+        margin-bottom: 40px;
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #ffffff;
       }
 
-      /* Enlaces del menú */
       .sidebar a {
         display: block;
-        margin: 15px 0;
-        color: white;
+        margin: 12px 0;
+        padding: 12px 15px;
+        color: #c0c0c0;
         text-decoration: none;
         font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
       }
 
-      /* Efecto hover */
       .sidebar a:hover {
-        text-decoration: underline;
+        background: #2e3173;
+        color: #ffffff;
       }
 
-      /* Área principal */
+      .sidebar a.active {
+        background: #4a4ff8;
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      /* Contenido principal */
       .content {
         flex: 1;
-        padding: 30px;
+        padding: 40px;
+        overflow-y: auto;
       }
 
-      /* Cabecera */
+      /* Header */
       header {
         text-align: center;
         margin-bottom: 30px;
       }
 
-      /* Contenedor principal */
+      header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Main cards */
       main {
         max-width: 900px;
         margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
       }
 
-      /* Tarjetas de estadísticas */
-      .card {
-        background: white;
-        border-radius: 10px;
-        padding: 25px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 25px;
+      .card,
+      .presupuesto-card,
+      .perfil-card,
+      .estadistica-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .card h3 {
-        margin-top: 0;
-        margin-bottom: 15px;
+      .card h3,
+      .presupuesto-card h3,
+      .perfil-card h3,
+      .estadistica-card h3 {
+        font-size: 22px;
+        font-weight: 600;
       }
 
-      /* Zona donde irá el gráfico */
-      .grafico {
+      .card p,
+      .presupuesto-card p,
+      .perfil-card p,
+      .estadistica-card p {
+        color: #555;
+        font-size: 16px;
+      }
+
+      /* Saldo */
+      .saldo {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        color: #333;
+      }
+
+      /* Fila de ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .ingreso {
+        background: #daf5e5; /* verde suave */
+        color: #2a7f4f;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .gasto {
+        background: #fddede; /* rojo suave */
+        color: #b82a2a;
+        width: 280px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* Presupuesto */
+      .presupuesto-card h3 {
+        color: #1c1f34;
+      }
+
+      /* Perfil */
+      .perfil-card h3 {
+        color: #1c1f34;
+      }
+
+      .editar-btn {
+        background: #4a4ff8;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        align-self: start;
+        transition: background 0.3s ease;
+      }
+
+      .editar-btn:hover {
+        background: #2e31d1;
+      }
+
+      /* Estadísticas */
+      .grafico-placeholder {
         height: 180px;
         background: #e0e0e0;
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: #555;
-        font-size: 18px;
+        align-items: center;
+        color: #777;
+        font-weight: 500;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .layout,
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-around;
+          padding: 20px 10px;
+        }
+
+        .sidebar a {
+          margin: 0;
+        }
+
+        .cards-row {
+          flex-direction: column;
+          align-items: center;
+        }
       }
     </style>
   </head>
