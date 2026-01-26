@@ -12,45 +12,46 @@
       body,
       html {
         margin: 0;
-        height: 100%;
+        padding: 0;
         font-family: Arial, sans-serif;
         background: #f4f6f8;
       }
 
-      /* Layout general */
       .layout {
         display: flex;
-        height: 100vh;
+        min-height: 100vh;
       }
 
       /* Barra lateral */
       .sidebar {
         width: 220px;
-        background: #2c3e50; /* azul oscuro profesional */
+        background: #2c3e50; /* azul oscuro */
         color: white;
         padding: 20px;
         box-sizing: border-box;
       }
 
       .sidebar h2 {
-        margin-top: 0;
         text-align: center;
+        margin-top: 0;
         color: #ecf0f1;
       }
 
       .sidebar a {
         display: block;
-        margin: 15px 0;
+        margin: 12px 0;
         color: white;
+        font-size: 16px;
         text-decoration: none;
-        font-size: 18px;
+        padding: 8px 10px;
+        border-radius: 6px;
         transition: 0.3s;
       }
 
       .sidebar a:hover,
       .sidebar a.active {
-        text-decoration: underline;
-        color: #1abc9c; /* verde profesional */
+        background: #1abc9c; /* verde profesional */
+        color: #fff;
       }
 
       /* Contenido */
@@ -63,54 +64,85 @@
       /* Header */
       header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         color: #2c3e50;
       }
 
       /* Main */
       main {
-        max-width: 800px;
+        max-width: 900px;
         margin: auto;
       }
 
-      /* Cards */
-      .card {
+      /* Tarjetas */
+      .card,
+      .presupuesto-card,
+      .perfil-card {
         background: #fff;
         border-radius: 10px;
         padding: 25px;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
-      }
-
-      .card h3 {
-        margin-top: 0;
-        color: #2c3e50;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
       /* Saldo */
       .saldo {
-        margin-bottom: 30px;
         font-size: 24px;
-        color: #16a085; /* verde profesional para saldo */
+        color: #16a085;
       }
 
-      /* Fila de ingresos y gastos */
+      /* Tarjetas de ingresos y gastos */
       .cards-row {
         display: flex;
         gap: 20px;
         justify-content: center;
       }
 
-      /* Colores */
       .ingreso {
-        background: #e0f7e0; /* verde suave */
+        background: #d5f5e3;
         width: 250px;
+        text-align: center;
       }
 
       .gasto {
-        background: #fde0e0; /* rojo suave */
+        background: #f9ebea;
         width: 250px;
+        text-align: center;
+      }
+
+      /* Presupuesto */
+      .presupuesto-card h3 {
+        color: #2c3e50;
+      }
+
+      .presupuesto-card p {
+        color: #7f8c8d;
+      }
+
+      /* Perfil */
+      .perfil-card p {
+        color: #7f8c8d;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .perfil-card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+
+      .editar-btn {
+        background: #2980b9;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .editar-btn:hover {
+        background: #1f6391;
       }
     </style>
   </head>

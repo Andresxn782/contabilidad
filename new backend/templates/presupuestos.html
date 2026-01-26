@@ -8,21 +8,23 @@
       body,
       html {
         margin: 0;
-        height: 100%;
+        padding: 0;
         font-family: Arial, sans-serif;
         background: #f4f6f8;
       }
 
       .layout {
         display: flex;
-        height: 100vh;
+        min-height: 100vh;
       }
 
+      /* Barra lateral */
       .sidebar {
         width: 220px;
-        background: #2c3e50;
+        background: #2c3e50; /* azul oscuro */
         color: white;
         padding: 20px;
+        box-sizing: border-box;
       }
 
       .sidebar h2 {
@@ -33,43 +35,110 @@
 
       .sidebar a {
         display: block;
-        margin: 15px 0;
+        margin: 12px 0;
         color: white;
+        font-size: 16px;
         text-decoration: none;
-        font-size: 18px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        transition: 0.3s;
       }
 
       .sidebar a:hover,
       .sidebar a.active {
-        color: #1abc9c;
+        background: #1abc9c; /* verde profesional */
+        color: #fff;
       }
 
+      /* Contenido */
       .content {
         flex: 1;
         padding: 30px;
         background: #ecf0f1;
       }
 
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #2c3e50;
+      }
+
+      /* Main */
       main {
-        max-width: 800px;
+        max-width: 900px;
         margin: auto;
       }
 
-      .presupuesto-card {
+      /* Tarjetas */
+      .card,
+      .presupuesto-card,
+      .perfil-card {
         background: #fff;
         border-radius: 10px;
         padding: 25px;
         margin-bottom: 20px;
-        text-align: center;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
+      /* Saldo */
+      .saldo {
+        font-size: 24px;
+        color: #16a085;
+      }
+
+      /* Tarjetas de ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .ingreso {
+        background: #d5f5e3;
+        width: 250px;
+        text-align: center;
+      }
+
+      .gasto {
+        background: #f9ebea;
+        width: 250px;
+        text-align: center;
+      }
+
+      /* Presupuesto */
       .presupuesto-card h3 {
         color: #2c3e50;
       }
 
       .presupuesto-card p {
         color: #7f8c8d;
+      }
+
+      /* Perfil */
+      .perfil-card p {
+        color: #7f8c8d;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .perfil-card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+
+      .editar-btn {
+        background: #2980b9;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .editar-btn:hover {
+        background: #1f6391;
       }
     </style>
   </head>
