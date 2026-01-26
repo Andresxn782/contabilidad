@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(to right, #6c63ff, #00bfa6);
+  background: linear-gradient(to right, #2c3e50, #34495e); /* colores más profesionales y sobrios */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -17,7 +16,7 @@ body {
 
 /* Contenedor del login */
 .login-container {
-  background: #fff;
+  background: #ecf0f1; /* gris claro profesional */
   padding: 40px 50px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -28,7 +27,7 @@ body {
 
 .login-container h1 {
   margin-bottom: 25px;
-  color: #333;
+  color: #2c3e50;
   font-size: 28px;
 }
 
@@ -38,14 +37,14 @@ body {
   padding: 12px 15px;
   margin: 10px 0;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #bdc3c7;
   font-size: 16px;
   transition: 0.3s;
 }
 
 .login-container input:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+  border-color: #2980b9; /* azul profesional al enfocar */
+  box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
   outline: none;
 }
 
@@ -54,24 +53,24 @@ body {
   width: 100%;
   padding: 12px;
   margin-top: 15px;
-  background: #6c63ff;
+  background: #2980b9; /* azul profesional */
   border: none;
   border-radius: 8px;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 5px 15px rgba(41, 128, 185, 0.4);
 }
 
 .login-container button:hover {
-  background: #574bd8;
+  background: #1f6391; /* azul más oscuro al pasar el mouse */
 }
 
 /* Mensaje de error */
 .error {
-  background: #fde0e0;
-  color: #d32f2f;
+  background: #e74c3c; /* rojo profesional */
+  color: #fff;
   padding: 10px 15px;
   border-radius: 8px;
   margin: 10px 0;
@@ -81,11 +80,11 @@ body {
 .login-container p {
   margin-top: 15px;
   font-size: 14px;
-  color: #666;
+  color: #7f8c8d;
 }
 
 .login-container a {
-  color: #6c63ff;
+  color: #2980b9;
   text-decoration: none;
   font-weight: bold;
 }

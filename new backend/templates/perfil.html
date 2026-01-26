@@ -5,222 +5,88 @@
     <title>Perfil | Contabilidad</title>
 
     <style>
-      /* Reset básico */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-
       body,
       html {
+        margin: 0;
         height: 100%;
-        background: #f0f2f5;
-        color: #333;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
       }
 
-      /* Layout principal */
-      .layout,
-      .app {
+      .layout {
         display: flex;
-        min-height: 100vh;
+        height: 100vh;
       }
 
-      /* Barra lateral */
       .sidebar {
-        width: 240px;
-        background: #1c1f34; /* azul oscuro moderno */
+        width: 220px;
+        background: #2c3e50;
         color: white;
-        padding: 30px 20px;
-        display: flex;
-        flex-direction: column;
+        padding: 20px;
       }
 
       .sidebar h2 {
         text-align: center;
-        margin-bottom: 40px;
-        font-size: 26px;
-        letter-spacing: 1px;
-        font-weight: 700;
-        color: #ffffff;
+        margin-top: 0;
+        color: #ecf0f1;
       }
 
       .sidebar a {
         display: block;
-        margin: 12px 0;
-        padding: 12px 15px;
-        color: #c0c0c0;
+        margin: 15px 0;
+        color: white;
         text-decoration: none;
         font-size: 18px;
-        border-radius: 8px;
-        transition: all 0.3s ease-in-out;
       }
 
-      .sidebar a:hover {
-        background: #2e3173;
-        color: #ffffff;
-      }
-
+      .sidebar a:hover,
       .sidebar a.active {
-        background: #4a4ff8;
-        color: #ffffff;
+        color: #1abc9c;
+      }
+
+      .content {
+        flex: 1;
+        padding: 30px;
+        background: #ecf0f1;
+      }
+
+      main {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .perfil-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .perfil-card p {
+        color: #7f8c8d;
+        margin-bottom: 5px;
         font-weight: bold;
       }
 
-      /* Contenido principal */
-      .content {
-        flex: 1;
-        padding: 40px;
-        overflow-y: auto;
-      }
-
-      /* Header */
-      header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      header h1 {
-        font-size: 28px;
-        margin-bottom: 10px;
-      }
-
-      header p {
-        color: #555;
-        font-size: 16px;
-      }
-
-      /* Main cards */
-      main {
-        max-width: 900px;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-      }
-
-      .card,
-      .presupuesto-card,
-      .perfil-card,
-      .estadistica-card {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 25px 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .card h3,
-      .presupuesto-card h3,
-      .perfil-card h3,
-      .estadistica-card h3 {
-        font-size: 22px;
-        font-weight: 600;
-      }
-
-      .card p,
-      .presupuesto-card p,
-      .perfil-card p,
-      .estadistica-card p {
-        color: #555;
-        font-size: 16px;
-      }
-
-      /* Saldo */
-      .saldo {
-        font-size: 28px;
-        font-weight: 700;
-        text-align: center;
-        color: #333;
-      }
-
-      /* Fila de ingresos y gastos */
-      .cards-row {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .ingreso {
-        background: #daf5e5; /* verde suave */
-        color: #2a7f4f;
-        width: 280px;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .gasto {
-        background: #fddede; /* rojo suave */
-        color: #b82a2a;
-        width: 280px;
-        text-align: center;
-        padding: 20px;
-      }
-
-      /* Presupuesto */
-      .presupuesto-card h3 {
-        color: #1c1f34;
-      }
-
-      /* Perfil */
       .perfil-card h3 {
-        color: #1c1f34;
+        color: #2c3e50;
+        margin-top: 0;
       }
 
       .editar-btn {
-        background: #4a4ff8;
+        background: #2980b9;
         color: white;
         border: none;
-        border-radius: 8px;
         padding: 12px 20px;
-        font-size: 16px;
+        border-radius: 8px;
         cursor: pointer;
-        align-self: start;
-        transition: background 0.3s ease;
+        font-size: 16px;
       }
 
       .editar-btn:hover {
-        background: #2e31d1;
-      }
-
-      /* Estadísticas */
-      .grafico-placeholder {
-        height: 180px;
-        background: #e0e0e0;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #777;
-        font-weight: 500;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .layout,
-        .app {
-          flex-direction: column;
-        }
-
-        .sidebar {
-          width: 100%;
-          flex-direction: row;
-          justify-content: space-around;
-          padding: 20px 10px;
-        }
-
-        .sidebar a {
-          margin: 0;
-        }
-
-        .cards-row {
-          flex-direction: column;
-          align-items: center;
-        }
+        background: #1f6391;
       }
     </style>
   </head>
