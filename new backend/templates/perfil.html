@@ -20,15 +20,15 @@
 
       .sidebar {
         width: 220px;
-        background: #2c3e50;
+        background: teal;
         color: white;
         padding: 20px;
+        box-sizing: border-box;
       }
 
       .sidebar h2 {
         text-align: center;
         margin-top: 0;
-        color: #ecf0f1;
       }
 
       .sidebar a {
@@ -39,15 +39,18 @@
         font-size: 18px;
       }
 
-      .sidebar a:hover,
-      .sidebar a.active {
-        color: #1abc9c;
+      .sidebar a:hover {
+        text-decoration: underline;
       }
 
       .content {
         flex: 1;
         padding: 30px;
-        background: #ecf0f1;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
       }
 
       main {
@@ -55,38 +58,33 @@
         margin: auto;
       }
 
-      .perfil-card {
-        background: #fff;
+      .card {
+        background: white;
         border-radius: 10px;
-        padding: 20px;
+        padding: 25px;
         margin-bottom: 20px;
-        text-align: left;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
-      .perfil-card p {
-        color: #7f8c8d;
+      .card p {
+        color: #777;
         margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      .perfil-card h3 {
-        color: #2c3e50;
-        margin-top: 0;
       }
 
       .editar-btn {
-        background: #2980b9;
+        width: 100%;
+        padding: 12px;
+        background: teal;
         color: white;
         border: none;
-        padding: 12px 20px;
         border-radius: 8px;
-        cursor: pointer;
         font-size: 16px;
+        cursor: pointer;
       }
 
       .editar-btn:hover {
-        background: #1f6391;
+        background: #006d6d;
       }
     </style>
   </head>

@@ -9,140 +9,103 @@
     <!-- Título que aparece en la pestaña del navegador -->
 
     <style>
+      /* Estilos generales para todo el documento */
       body,
       html {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: #f4f6f8;
+        margin: 0; /* elimina márgenes por defecto */
+        height: 100%; /* ocupa toda la altura */
+        font-family: Arial, sans-serif; /* tipo de letra */
+        background: #f4f6f8; /* color de fondo */
       }
 
+      /* Layout general: divide pantalla en sidebar + contenido */
       .layout {
-        display: flex;
-        min-height: 100vh;
+        display: flex; /* coloca elementos en fila */
+        height: 100vh; /* altura total de la pantalla */
       }
 
-      /* Barra lateral */
+      /* Barra lateral izquierda */
       .sidebar {
-        width: 220px;
-        background: #2c3e50; /* azul oscuro */
-        color: white;
+        width: 220px; /* ancho fijo */
+        background: teal; /* color de fondo */
+        color: white; /* texto blanco */
         padding: 20px;
         box-sizing: border-box;
       }
 
+      /* Título del menú */
       .sidebar h2 {
-        text-align: center;
         margin-top: 0;
-        color: #ecf0f1;
+        text-align: center;
       }
 
+      /* Enlaces del menú */
       .sidebar a {
-        display: block;
-        margin: 12px 0;
+        display: block; /* cada enlace ocupa una línea */
+        margin: 15px 0;
         color: white;
-        font-size: 16px;
         text-decoration: none;
-        padding: 8px 10px;
-        border-radius: 6px;
-        transition: 0.3s;
+        font-size: 18px;
       }
 
-      .sidebar a:hover,
-      .sidebar a.active {
-        background: #1abc9c; /* verde profesional */
-        color: #fff;
+      /* Efecto al pasar el ratón */
+      .sidebar a:hover {
+        text-decoration: underline;
       }
 
-      /* Contenido */
+      /* Área de contenido principal */
       .content {
-        flex: 1;
+        flex: 1; /* ocupa el resto del espacio */
         padding: 30px;
-        background: #ecf0f1;
       }
 
-      /* Header */
+      /* Encabezado */
       header {
         text-align: center;
-        margin-bottom: 25px;
-        color: #2c3e50;
+        margin-bottom: 30px;
       }
 
-      /* Main */
+      /* Área principal */
       main {
-        max-width: 900px;
-        margin: auto;
+        max-width: 800px;
+        margin: auto; /* centra el contenido */
       }
 
       /* Tarjetas */
-      .card,
-      .presupuesto-card,
-      .perfil-card {
-        background: #fff;
-        border-radius: 10px;
+      .card {
+        background: white;
+        border-radius: 10px; /* bordes redondeados */
         padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Saldo */
-      .saldo {
-        font-size: 24px;
-        color: #16a085;
-      }
-
-      /* Tarjetas de ingresos y gastos */
-      .cards-row {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-      }
-
-      .ingreso {
-        background: #d5f5e3;
-        width: 250px;
         text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra */
       }
 
-      .gasto {
-        background: #f9ebea;
-        width: 250px;
-        text-align: center;
-      }
-
-      /* Presupuesto */
-      .presupuesto-card h3 {
-        color: #2c3e50;
-      }
-
-      .presupuesto-card p {
-        color: #7f8c8d;
-      }
-
-      /* Perfil */
-      .perfil-card p {
-        color: #7f8c8d;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      .perfil-card h3 {
-        color: #2c3e50;
+      .card h3 {
         margin-top: 0;
       }
 
-      .editar-btn {
-        background: #2980b9;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
+      /* Tarjeta de saldo */
+      .saldo {
+        margin-bottom: 30px;
+        font-size: 24px;
       }
 
-      .editar-btn:hover {
-        background: #1f6391;
+      /* Fila que contiene ingresos y gastos */
+      .cards-row {
+        display: flex;
+        gap: 20px; /* separación entre tarjetas */
+        justify-content: center;
+      }
+
+      /* Colores de tarjetas */
+      .ingreso {
+        background: #e0f7e0;
+        width: 250px;
+      }
+
+      .gasto {
+        background: #fde0e0;
+        width: 250px;
       }
     </style>
   </head>
