@@ -1,23 +1,79 @@
 <!DOCTYPE html>
+<!--
+  Define que este documento es HTML5
+-->
 <html lang="es">
+<!--
+  lang="es" indica que el idioma principal del documento es español
+-->
 <head>
   <meta charset="UTF-8">
+  <!--
+    UTF-8 permite mostrar correctamente acentos y caracteres especiales
+  -->
+
   <title>Login | Contabilidad</title>
+  <!--
+    Título que aparece en la pestaña del navegador
+  -->
+
+  <!--
+    Se carga una hoja de estilos CSS desde la carpeta static/css/login.css
+    url_for es una función de Flask que genera la ruta correcta al archivo
+  -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
+
 <body>
+
+  <!--
+    Contenedor principal del formulario de login
+  -->
   <div class="login-container">
+
+    <!-- Título del formulario -->
     <h1>Iniciar sesión</h1>
+
+    <!--
+      Si existe la variable "error" enviada desde Flask,
+      se muestra el mensaje dentro de este párrafo
+    -->
     {% if error %}
       <p class="error">{{ error }}</p>
     {% endif %}
+
+    <!--
+      Formulario que envía los datos por método POST al servidor
+    -->
     <form method="POST">
+
+      <!--
+        Campo para introducir el email
+        type="email" valida que tenga formato de correo
+        required obliga a que se rellene
+      -->
       <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <!--
+        Campo para la contraseña
+        type="password" oculta los caracteres
+      -->
       <input type="password" id="password" name="password" placeholder="Contraseña" required>
+
+      <!--
+        Botón para enviar el formulario
+      -->
       <input type="submit" value="Entrar">
+
     </form>
   </div>
+
+  <!--
+    Se carga un archivo JavaScript externo para manejar
+    la lógica del login (validaciones, animaciones, etc.)
+  -->
   <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
 </body>
 </html>
 
